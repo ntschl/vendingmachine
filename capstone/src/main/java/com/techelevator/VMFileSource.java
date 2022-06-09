@@ -9,8 +9,9 @@ import java.util.Scanner;
 
 public class VMFileSource {
 
-    public List<Product> getProductList() {
-        List<Product> productList = new ArrayList<>();
+    private List<Product> productList = new ArrayList<>();
+
+    public VMFileSource() {
         File vmFile = new File("vendingmachine.csv");
         try (Scanner fileInput = new Scanner(vmFile)) {
             while (fileInput.hasNextLine()) {
@@ -21,6 +22,11 @@ public class VMFileSource {
             }
         } catch (FileNotFoundException fnf) {
             System.out.println("File not found!");
-        } return productList;
+        }
+    }
+
+    public List<Product> getProductList() {
+        return productList;
     }
 }
+
