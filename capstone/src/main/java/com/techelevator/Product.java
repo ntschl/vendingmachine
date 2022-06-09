@@ -4,11 +4,12 @@ import java.math.BigDecimal;
 
 public class Product {
 
-    private String nameOfProduct;
+    protected String nameOfProduct;
     private String slotID;
     private int stock;
     private BigDecimal price;
     private String typeOfSnack;
+    protected String message;
 
     public Product(String slotID, String nameOfProduct, BigDecimal price, String typeOfSnack) {
         this.nameOfProduct = nameOfProduct;
@@ -24,6 +25,14 @@ public class Product {
 
     public void setTypeOfSnack(String typeOfSnack) {
         this.typeOfSnack = typeOfSnack;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getNameOfProduct() {

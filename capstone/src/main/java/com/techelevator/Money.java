@@ -20,7 +20,6 @@ public class Money {
 
     public void feedMoney(BigDecimal dollarAmount) {
         currentMoneyProvided = currentMoneyProvided.add(dollarAmount);
-
     }
 
 }
