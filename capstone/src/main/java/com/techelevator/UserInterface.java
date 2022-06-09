@@ -88,15 +88,7 @@ public class UserInterface {
         String valueMoney = moneyInput.nextLine();
         BigDecimal fedMoney = BigDecimal.valueOf(Double.parseDouble(valueMoney));
         money.feedMoney(fedMoney);
-        System.out.println();
-        System.out.println("Current money provided: " + money.getCurrentMoneyProvided());
-        System.out.println();
-        System.out.println("(1) Feed Money");
-        System.out.println("(2) Select Product");
-        System.out.println("(3) Finish Transaction");
-        System.out.println();
-        System.out.print("Please select an option (by number): ");
-        System.out.println();
+        makePurchase();
     }
 
     private void selectProduct() {
@@ -104,23 +96,37 @@ public class UserInterface {
         System.out.print("Please choose a slot ID: ");
         String slotChoice = userInput.nextLine();
         for (int i = 0; i < listOfProduct.size(); i++) {
-            if (listOfProduct.get(i).getSlotID().equals(slotChoice)) {
-                dispense(listOfProduct.get(i));
+            if (listOfProduct.get(i).getSlotID().equalsIgnoreCase(slotChoice)) {
+                if (money.getCurrentMoneyProvided().compareTo(listOfProduct.get(i).getPrice()) == - 1) {
+                    System.out.println("Not enough money");
+                    makePurchase();
+                } else {
+                    dispense(listOfProduct.get(i));
+                }
             }
         }
     }
 
     private void dispense(Product product) {
+        if (product.getStock() == 0) {
+            System.out.println("Out of stock!");
+            makePurchase();
+        }
         System.out.println("Enjoy your treat!");
+        money.setCurrentMoneyProvided(money.getCurrentMoneyProvided().subtract(product.getPrice()));
         if (product.getTypeOfSnack().equals("Chip")) {
             System.out.println("Crunch Crunch, Yum!");
         } else if (product.getTypeOfSnack().equals("Drink")) {
             System.out.println("Glug Glug, Yum!");
         } else if (product.getTypeOfSnack().equals("Gum")) {
             System.out.println("Chew Chew, Yum!");
-        } else if (product.getTypeOfSnack().equals("Candy")){
+        } else if (product.getTypeOfSnack().equals("Candy")) {
             System.out.println("Munch Munch, Yum!");
         }
+        BigDecimal remainingBalance = money.getCurrentMoneyProvided();
+        System.out.printf("%.2f remaining\n", remainingBalance);
+
+        product.setStock(product.getStock() - 1);
     }
 }
 
