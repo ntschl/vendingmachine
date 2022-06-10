@@ -64,8 +64,8 @@ public class UserInterface {
 
     private void makePurchase() {
         Scanner userInput = new Scanner(System.in);
-
-        System.out.println("Current money provided: " + money.getCurrentMoneyProvided());
+        System.out.println();
+        System.out.printf("Current money provided: $%.2f", money.getCurrentMoneyProvided());
         System.out.println();
         System.out.println("(1) Feed Money");
         System.out.println("(2) Select Product");
@@ -76,18 +76,19 @@ public class UserInterface {
         String optionChosen = userInput.nextLine();
 
         if (optionChosen.equals("1")) {
-            feedChosen();
+            feedMoney();
         } else if (optionChosen.equals("2")) {
             selectProduct();
         }
     }
 
-    private void feedChosen() {
+    private void feedMoney() {
         Scanner moneyInput = new Scanner(System.in);
-        System.out.print("How many whole dollars would you like to feed the machine? ");
+        System.out.println();
+        System.out.print("How many whole dollars would you like to feed the machine? $");
         String valueMoney = moneyInput.nextLine();
-        BigDecimal fedMoney = BigDecimal.valueOf(Double.parseDouble(valueMoney));
-        money.feedMoney(fedMoney);
+        BigDecimal moneyDeposited = BigDecimal.valueOf(Double.parseDouble(valueMoney));
+        money.depositMoney(moneyDeposited);
         makePurchase();
     }
 
@@ -104,7 +105,13 @@ public class UserInterface {
                     dispense(listOfProduct.get(i));
                 }
             }
+            else {
+                continue;
+            }
         }
+        System.out.print("Please enter valid slot ID");
+        System.out.println();
+        makePurchase();
     }
 
     private void dispense(Product product) {
@@ -124,7 +131,7 @@ public class UserInterface {
             System.out.println("Munch Munch, Yum!");
         }
         BigDecimal remainingBalance = money.getCurrentMoneyProvided();
-        System.out.printf("%.2f remaining\n", remainingBalance);
+        System.out.printf("$" +"%.2f remaining\n", remainingBalance);
 
         product.setStock(product.getStock() - 1);
     }

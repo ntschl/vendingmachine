@@ -19,7 +19,7 @@ public class Money {
         this.currentMoneyProvided = currentMoneyProvided;
     }
 
-    public void feedMoney(BigDecimal dollarAmount) {
+    public void depositMoney(BigDecimal dollarAmount) {
         currentMoneyProvided = currentMoneyProvided.add(dollarAmount);
     }
 
