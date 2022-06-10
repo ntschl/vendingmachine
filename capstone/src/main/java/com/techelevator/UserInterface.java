@@ -63,33 +63,35 @@ public class UserInterface {
     }
 
     private void makePurchase() {
-        Scanner userInput = new Scanner(System.in);
-        System.out.println();
-        System.out.printf("Current money provided: $%.2f", money.getCurrentMoneyProvided());
-        System.out.println();
-        System.out.println("(1) Feed Money");
-        System.out.println("(2) Select Product");
-        System.out.println("(3) Finish Transaction");
-        System.out.println();
-        System.out.print("Please select an option (by number): ");
+        while (true) {
+            System.out.println();
+            System.out.printf("Current money provided: $%.2f", money.getCurrentMoneyProvided());
+            System.out.println();
+            System.out.println("(1) Feed Money");
+            System.out.println("(2) Select Product");
+            System.out.println("(3) Finish Transaction");
+            System.out.println();
+            System.out.print("Please select an option (by number): ");
 
-        String optionChosen = userInput.nextLine();
+            String optionChosen = userInput.nextLine();
 
-        if (optionChosen.equals("1")) {
-            feedMoney();
-        } else if (optionChosen.equals("2")) {
-            selectProduct();
+            if (optionChosen.equals("1")) {
+                feedMoney();
+            } else if (optionChosen.equals("2")) {
+                selectProduct();
+            } else if (optionChosen.equals("3")) {
+                break;
+            }
         }
     }
 
     private void feedMoney() {
-        Scanner moneyInput = new Scanner(System.in);
         System.out.println();
         System.out.print("How many whole dollars would you like to feed the machine? $");
-        String valueMoney = moneyInput.nextLine();
+        String valueMoney = userInput.nextLine();
         BigDecimal moneyDeposited = BigDecimal.valueOf(Double.parseDouble(valueMoney));
         money.depositMoney(moneyDeposited);
-        makePurchase();
+        return;
     }
 
     private void selectProduct() {
@@ -98,26 +100,24 @@ public class UserInterface {
         String slotChoice = userInput.nextLine();
         for (int i = 0; i < listOfProduct.size(); i++) {
             if (listOfProduct.get(i).getSlotID().equalsIgnoreCase(slotChoice)) {
-                if (money.getCurrentMoneyProvided().compareTo(listOfProduct.get(i).getPrice()) == - 1) {
+                if (money.getCurrentMoneyProvided().compareTo(listOfProduct.get(i).getPrice()) == -1) {
                     System.out.println("Not enough money");
-                    makePurchase();
+                    return;
                 } else {
                     dispense(listOfProduct.get(i));
+                    return;
                 }
-            }
-            else {
-                continue;
             }
         }
         System.out.print("Please enter valid slot ID");
         System.out.println();
-        makePurchase();
+        return;
     }
 
     private void dispense(Product product) {
         if (product.getStock() == 0) {
             System.out.println("Out of stock!");
-            makePurchase();
+            return;
         }
         System.out.println("Enjoy your treat!");
         money.setCurrentMoneyProvided(money.getCurrentMoneyProvided().subtract(product.getPrice()));
@@ -131,7 +131,7 @@ public class UserInterface {
             System.out.println("Munch Munch, Yum!");
         }
         BigDecimal remainingBalance = money.getCurrentMoneyProvided();
-        System.out.printf("$" +"%.2f remaining\n", remainingBalance);
+        System.out.printf("$" + "%.2f remaining\n", remainingBalance);
 
         product.setStock(product.getStock() - 1);
     }
