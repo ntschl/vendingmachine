@@ -19,7 +19,6 @@ public class UserInterface {
 
     private boolean isOn = true;
 
-
     public void run() {
 
         File file = new File("vendingmachine.csv");
@@ -33,7 +32,6 @@ public class UserInterface {
             System.out.println("(3) Exit");
             System.out.println();
             System.out.print("Please select an option (by number): ");
-
 
             String optionChosen = userInput.nextLine();
 
@@ -57,7 +55,6 @@ public class UserInterface {
             String type = product.getTypeOfSnack();
             int stock = product.getStock();
             System.out.printf("%s %s %.2f %s %s\n", slot, name, price, type, stock);
-
         }
         System.out.println();
     }
