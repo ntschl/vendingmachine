@@ -76,7 +76,8 @@ public class UserInterface {
             } else if (optionChosen.equals("2")) {
                 selectProduct();
             } else if (optionChosen.equals("3")) {
-                break;
+                finishTransaction();
+                return;
             }
         }
     }
@@ -108,7 +109,9 @@ public class UserInterface {
             vm.dispense(product);
             return;
         }
-
+    }
+    private void finishTransaction() {
+        vm.money.makeChange();
     }
 
 }

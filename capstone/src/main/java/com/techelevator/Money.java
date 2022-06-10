@@ -8,7 +8,7 @@ public class Money {
 
     }
 
-    public BigDecimal currentMoneyProvided = new BigDecimal(0);
+    public BigDecimal currentMoneyProvided = BigDecimal.ZERO;
 
     public Money(BigDecimal currentMoneyProvided) {
         this.currentMoneyProvided = currentMoneyProvided;
@@ -28,6 +28,30 @@ public class Money {
 
     public boolean checkBalance(BigDecimal amount) {
         return (amount.compareTo(currentMoneyProvided) <= 0);
+    }
+
+    public void makeChange() {
+        int quarterCount = 0;
+        int dimeCount = 0;
+        int nickelCount = 0;
+        BigDecimal quarter = new BigDecimal("0.25");
+        while (currentMoneyProvided.compareTo(quarter) >= 0) {
+            currentMoneyProvided = currentMoneyProvided.subtract(quarter);
+            quarterCount++;
+        }
+        while (currentMoneyProvided.compareTo(BigDecimal.valueOf(0.10)) >= 0) {
+            currentMoneyProvided = currentMoneyProvided.subtract(BigDecimal.valueOf(0.10));
+            dimeCount++;
+        }
+        while (currentMoneyProvided.compareTo(BigDecimal.valueOf(0.05)) >= 0) {
+            currentMoneyProvided = currentMoneyProvided.subtract(BigDecimal.valueOf(0.05));
+            nickelCount++;
+            break;
+        }
+        System.out.println();
+        System.out.printf("Here is your change: %d quarters, %d dimes, %d nickel.", quarterCount, dimeCount, nickelCount);
+        System.out.println();
+        this.currentMoneyProvided = BigDecimal.ZERO;
     }
 
 //    public void checkMoneyGiven(){

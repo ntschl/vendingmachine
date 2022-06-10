@@ -6,6 +6,7 @@ public class VendingMachine {
 
     Money money = new Money();
     Inventory inventory = new Inventory();
+    Log log = new Log();
 
     public void addMoney(BigDecimal amount){
         money.depositMoney(amount);
