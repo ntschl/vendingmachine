@@ -88,6 +88,7 @@ public class UserInterface {
         String valueMoney = userInput.nextLine();
         BigDecimal moneyDeposited = BigDecimal.valueOf(Double.parseDouble(valueMoney));
         vm.addMoney(moneyDeposited);
+        vm.log.write("FEED MONEY", moneyDeposited, vm.money.currentMoneyProvided);
         return;
     }
 
