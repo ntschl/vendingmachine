@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    private VMFileSource fileSource = new VMFileSource();
     private Money money = new Money(BigDecimal.ZERO);
     Scanner userInput = new Scanner(System.in);
-    List<Product> listOfProduct = fileSource.getProductList();
+    Inventory inventory = new Inventory();
+    VendingMachine vm = new VendingMachine();
 
     public static void main(String[] args) {
         UserInterface ui = new UserInterface();
@@ -50,7 +50,7 @@ public class UserInterface {
 
     private void displayProducts() {
         System.out.println();
-        for (Product product : fileSource.getProductList()) {
+        for (Product product : inventory.getProductList()) {
             String slot = product.getSlotID();
             String name = product.getNameOfProduct();
             BigDecimal price = product.getPrice();
@@ -98,13 +98,13 @@ public class UserInterface {
         displayProducts();
         System.out.print("Please choose a slot ID: ");
         String slotChoice = userInput.nextLine();
-        for (int i = 0; i < listOfProduct.size(); i++) {
-            if (listOfProduct.get(i).getSlotID().equalsIgnoreCase(slotChoice)) {
-                if (money.getCurrentMoneyProvided().compareTo(listOfProduct.get(i).getPrice()) == -1) {
+        for (int i = 0; i < inventory.getProductList().size(); i++) {
+            if (inventory.getProductList().get(i).getSlotID().equalsIgnoreCase(slotChoice)) {
+                if (money.getCurrentMoneyProvided().compareTo(inventory.getProductList().get(i).getPrice()) == -1) {
                     System.out.println("Not enough money");
                     return;
                 } else {
-                    dispense(listOfProduct.get(i));
+                    dispense(inventory.getProductList().get(i));
                     return;
                 }
             }

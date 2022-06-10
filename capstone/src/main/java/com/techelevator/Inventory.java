@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class Inventory {
 
     private List<Product> productList = new ArrayList<>();
-    UserInterface ui = new UserInterface();
 
     public Inventory() {
         File vmFile = new File("vendingmachine.csv");

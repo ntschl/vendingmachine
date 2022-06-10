@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 
 public class Money {
 
+    public Money() {
+
+    }
 
     private BigDecimal currentMoneyProvided = new BigDecimal(0);
 
