@@ -26,6 +26,9 @@ public class Money {
         this.currentMoneyProvided = this.currentMoneyProvided.subtract(price);
     }
 
+    public boolean checkBalance(BigDecimal amount) {
+        return (amount.compareTo(currentMoneyProvided) <= 0);
+    }
 
 //    public void checkMoneyGiven(){
 //        currentMoneyProvided = currentMoneyProvided.subtract();

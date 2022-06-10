@@ -28,6 +28,15 @@ public class Inventory {
     public List<Product> getProductList() {
         return productList;
     }
+
+    public Product lookup(String slotID) {
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getSlotID().equalsIgnoreCase(slotID)) {
+                return productList.get(i);
+            }
+        }
+        return null;
+    }
 }
 
 //    public boolean hasValidID(String slotChoice) {

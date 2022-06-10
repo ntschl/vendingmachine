@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    private Money money = new Money(BigDecimal.ZERO);
     Scanner userInput = new Scanner(System.in);
     Inventory inventory = new Inventory();
     VendingMachine vm = new VendingMachine();
@@ -62,7 +61,7 @@ public class UserInterface {
     private void makePurchase() {
         while (true) {
             System.out.println();
-            System.out.printf("Current money provided: $%.2f", money.getCurrentMoneyProvided());
+            System.out.printf("Current money provided: $%.2f", vm.money.getCurrentMoneyProvided());
             System.out.println();
             System.out.println("(1) Feed Money");
             System.out.println("(2) Select Product");
@@ -87,7 +86,7 @@ public class UserInterface {
         System.out.print("How many whole dollars would you like to feed the machine? $");
         String valueMoney = userInput.nextLine();
         BigDecimal moneyDeposited = BigDecimal.valueOf(Double.parseDouble(valueMoney));
-        money.depositMoney(moneyDeposited);
+        vm.addMoney(moneyDeposited);
         return;
     }
 
@@ -95,42 +94,23 @@ public class UserInterface {
         displayProducts();
         System.out.print("Please choose a slot ID: ");
         String slotChoice = userInput.nextLine();
-        for (int i = 0; i < inventory.getProductList().size(); i++) {
-            if (inventory.getProductList().get(i).getSlotID().equalsIgnoreCase(slotChoice)) {
-                if (money.getCurrentMoneyProvided().compareTo(inventory.getProductList().get(i).getPrice()) == -1) {
-                    System.out.println("Not enough money");
-                    return;
-                } else {
-                    dispense(inventory.getProductList().get(i));
-                    return;
-                }
-            }
-        }
-        System.out.print("Please enter valid slot ID");
-        System.out.println();
-        return;
-    }
-
-    private void dispense(Product product) {
-        if (product.getStock() == 0) {
-            System.out.println("Out of stock!");
+        Product product = inventory.lookup(slotChoice);
+        if (product == null) {
+            System.out.print("Please enter valid slot ID");
+            System.out.println();
             return;
         }
-        System.out.println("Enjoy your treat!");
-        money.withdrawMoney(money.getCurrentMoneyProvided(), product.getPrice());
-        if (product.getTypeOfSnack().equals("Chip")) {
-            System.out.println("Crunch Crunch, Yum!");
-        } else if (product.getTypeOfSnack().equals("Drink")) {
-            System.out.println("Glug Glug, Yum!");
-        } else if (product.getTypeOfSnack().equals("Gum")) {
-            System.out.println("Chew Chew, Yum!");
-        } else if (product.getTypeOfSnack().equals("Candy")) {
-            System.out.println("Munch Munch, Yum!");
-        }
-        BigDecimal remainingBalance = money.getCurrentMoneyProvided();
-        System.out.printf("$" + "%.2f remaining\n", remainingBalance);
 
-        product.setStock(product.getStock() - 1);
+        if (!vm.money.checkBalance(product.getPrice())) {
+            System.out.println("Not enough money");
+            return;
+        } else {
+            vm.dispense(product);
+            return;
+        }
+
     }
+
 }
+
 
