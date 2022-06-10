@@ -23,6 +23,9 @@ public class Money {
         currentMoneyProvided = currentMoneyProvided.add(dollarAmount);
     }
 
+    public void withdrawMoney(BigDecimal balance, BigDecimal price) {
+        this.currentMoneyProvided = currentMoneyProvided.subtract(price);
+    }
 //    public void checkMoneyGiven(){
 //        currentMoneyProvided = currentMoneyProvided.subtract();
 //    }

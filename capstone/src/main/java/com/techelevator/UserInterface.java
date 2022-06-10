@@ -120,7 +120,7 @@ public class UserInterface {
             return;
         }
         System.out.println("Enjoy your treat!");
-        money.setCurrentMoneyProvided(money.getCurrentMoneyProvided().subtract(product.getPrice()));
+        money.withdrawMoney(money.getCurrentMoneyProvided(), product.getPrice());
         if (product.getTypeOfSnack().equals("Chip")) {
             System.out.println("Crunch Crunch, Yum!");
         } else if (product.getTypeOfSnack().equals("Drink")) {
