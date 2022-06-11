@@ -19,7 +19,7 @@ public class Log {
         try {
             FileOutputStream fos = new FileOutputStream(file, true);
             PrintWriter writer = new PrintWriter(fos);
-            DateTimeFormatter myDateAndTimeFormatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
+            DateTimeFormatter myDateAndTimeFormatter = DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm:ss a");
             String formattedDateAndTime = dateAndTime.now().format(myDateAndTimeFormatter);
             writer.printf(formattedDateAndTime + " " + "%s, %.2f, %.2f\n", actionTaken, firstAmount, secondAmount);
             writer.close();
