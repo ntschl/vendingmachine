@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 
 public class Money {
 
+    int quarterCount;
+    int dimeCount;
+    int nickelCount;
+
     public Money() {
 
     }
@@ -31,20 +35,22 @@ public class Money {
     }
 
     public void makeChange() {
-        int quarterCount = 0;
-        int dimeCount = 0;
-        int nickelCount = 0;
+        quarterCount = 0;
+        dimeCount = 0;
+        nickelCount = 0;
         BigDecimal quarter = new BigDecimal("0.25");
+        BigDecimal dime = new BigDecimal("0.10");
+        BigDecimal nickel = new BigDecimal("0.05");
         while (currentMoneyProvided.compareTo(quarter) >= 0) {
             currentMoneyProvided = currentMoneyProvided.subtract(quarter);
             quarterCount++;
         }
-        while (currentMoneyProvided.compareTo(BigDecimal.valueOf(0.10)) >= 0) {
-            currentMoneyProvided = currentMoneyProvided.subtract(BigDecimal.valueOf(0.10));
+        while (currentMoneyProvided.compareTo(dime) >= 0) {
+            currentMoneyProvided = currentMoneyProvided.subtract(dime);
             dimeCount++;
         }
-        while (currentMoneyProvided.compareTo(BigDecimal.valueOf(0.05)) >= 0) {
-            currentMoneyProvided = currentMoneyProvided.subtract(BigDecimal.valueOf(0.05));
+        while (currentMoneyProvided.compareTo(nickel) >= 0) {
+            currentMoneyProvided = currentMoneyProvided.subtract(nickel);
             nickelCount++;
             break;
         }
@@ -52,11 +58,6 @@ public class Money {
         System.out.printf("Here is your change: %d quarters, %d dimes, %d nickel.", quarterCount, dimeCount, nickelCount);
         System.out.println();
         this.currentMoneyProvided = BigDecimal.ZERO;
-
     }
-
-//    public void checkMoneyGiven(){
-//        currentMoneyProvided = currentMoneyProvided.subtract();
-//    }
 
 }

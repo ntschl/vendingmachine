@@ -10,6 +10,7 @@ public class UserInterface {
     Scanner userInput = new Scanner(System.in);
     Inventory inventory = new Inventory();
     VendingMachine vm = new VendingMachine();
+    SalesReport sr = new SalesReport();
 
     public static void main(String[] args) {
         UserInterface ui = new UserInterface();
@@ -41,6 +42,8 @@ public class UserInterface {
                 displayProducts();
             } else if (optionChosen.equals("2")) {
                 makePurchase();
+            } else if (optionChosen.equals("4")) {
+                sr.writeReport();
             }
         }
     }
@@ -53,7 +56,11 @@ public class UserInterface {
             BigDecimal price = product.getPrice();
             String type = product.getTypeOfSnack();
             int stock = product.getStock();
-            System.out.printf("%s %s %.2f %s %s\n", slot, name, price, type, stock);
+            if (stock == 0) {
+                System.out.printf("%s %s %.2f %s %s\n", slot, name, price, type, "SOLD OUT");
+            } else {
+                System.out.printf("%s %s %.2f %s %s\n", slot, name, price, type, stock);
+            }
         }
         System.out.println();
     }
@@ -104,7 +111,7 @@ public class UserInterface {
         }
 
         if (!vm.money.checkBalance(product.getPrice())) {
-            System.out.println("Not enough money");
+            System.out.println("Not enough money.");
             return;
         } else {
             vm.dispense(product);

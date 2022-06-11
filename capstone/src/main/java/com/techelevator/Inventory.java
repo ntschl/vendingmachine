@@ -38,14 +38,3 @@ public class Inventory {
         return null;
     }
 }
-
-//    public boolean hasValidID(String slotChoice) {
-//        for (Product product : productList) {
-//            if (product.getSlotID().equalsIgnoreCase(slotChoice)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//}
-

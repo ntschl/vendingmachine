@@ -23,32 +23,12 @@ public class Product {
         return typeOfSnack;
     }
 
-    public void setTypeOfSnack(String typeOfSnack) {
-        this.typeOfSnack = typeOfSnack;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public String getNameOfProduct() {
         return nameOfProduct;
     }
 
-    public void setNameOfProduct(String nameOfProduct) {
-        this.nameOfProduct = nameOfProduct;
-    }
-
     public String getSlotID() {
         return slotID;
-    }
-
-    public void setSlotID(String slotID) {
-        this.slotID = slotID;
     }
 
     public int getStock() {
@@ -61,10 +41,6 @@ public class Product {
 
     public BigDecimal getPrice() {
         return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
 }

@@ -13,7 +13,6 @@ public class Log {
 
     public LocalDateTime dateAndTime = LocalDateTime.now();
 
-
     public void updateLog(String actionTaken, BigDecimal firstAmount, BigDecimal secondAmount) {
         File file = new File("Log.txt");
         try {
