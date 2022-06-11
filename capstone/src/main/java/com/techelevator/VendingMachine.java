@@ -32,6 +32,7 @@ public class VendingMachine {
         System.out.printf("$" + "%.2f remaining\n", remainingBalance);
 
         product.setStock(product.getStock() - 1);
+        log.updateLog((product.getNameOfProduct()) + " " + (product.getSlotID()), product.getPrice(), remainingBalance);
     }
 
 }

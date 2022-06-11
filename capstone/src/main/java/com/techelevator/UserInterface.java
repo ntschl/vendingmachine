@@ -88,7 +88,7 @@ public class UserInterface {
         String valueMoney = userInput.nextLine();
         BigDecimal moneyDeposited = BigDecimal.valueOf(Double.parseDouble(valueMoney));
         vm.addMoney(moneyDeposited);
-        vm.log.write("FEED MONEY", moneyDeposited, vm.money.currentMoneyProvided);
+        vm.log.updateLog("FEED MONEY", moneyDeposited = BigDecimal.valueOf(Double.parseDouble(valueMoney)), vm.money.currentMoneyProvided);
         return;
     }
 
@@ -112,6 +112,7 @@ public class UserInterface {
         }
     }
     private void finishTransaction() {
+        vm.log.updateLog("GIVE CHANGE",vm.money.currentMoneyProvided, BigDecimal.ZERO);
         vm.money.makeChange();
     }
 

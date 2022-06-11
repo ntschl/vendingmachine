@@ -52,6 +52,7 @@ public class Money {
         System.out.printf("Here is your change: %d quarters, %d dimes, %d nickel.", quarterCount, dimeCount, nickelCount);
         System.out.println();
         this.currentMoneyProvided = BigDecimal.ZERO;
+
     }
 
 //    public void checkMoneyGiven(){

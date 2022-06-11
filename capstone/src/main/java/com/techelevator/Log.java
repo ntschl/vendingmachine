@@ -5,21 +5,23 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Log {
 
-    LocalDate date = LocalDate.now();
-    LocalTime time = LocalTime.now();
+    public LocalDateTime dateAndTime = LocalDateTime.now();
 
-    public void write(String actionTaken, BigDecimal firstAmount, BigDecimal secondAmount) {
+
+    public void updateLog(String actionTaken, BigDecimal firstAmount, BigDecimal secondAmount) {
         File file = new File("Log.txt");
         try {
             FileOutputStream fos = new FileOutputStream(file, true);
             PrintWriter writer = new PrintWriter(fos);
-            writer.printf("%s %s %s %f %f", date, time, actionTaken, firstAmount, secondAmount);
+            DateTimeFormatter myDateAndTimeFormatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
+            String formattedDateAndTime = dateAndTime.now().format(myDateAndTimeFormatter);
+            writer.printf(formattedDateAndTime + " " + "%s, %.2f, %.2f\n", actionTaken, firstAmount, secondAmount);
             writer.close();
         }
         catch (FileNotFoundException fnf) {
