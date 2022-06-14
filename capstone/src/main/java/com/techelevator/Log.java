@@ -13,14 +13,14 @@ public class Log {
 
     public LocalDateTime dateAndTime = LocalDateTime.now();
 
-    public void updateLog(String actionTaken, BigDecimal firstAmount, BigDecimal secondAmount) {
+    public void updateLog(String actionTaken, BigDecimal moneyAddedOrSubtracted, BigDecimal totalAvailableFunds) {
         File file = new File("Log.txt");
         try {
             FileOutputStream fos = new FileOutputStream(file, true);
             PrintWriter writer = new PrintWriter(fos);
             DateTimeFormatter myDateAndTimeFormatter = DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm:ss a");
             String formattedDateAndTime = dateAndTime.now().format(myDateAndTimeFormatter);
-            writer.printf(formattedDateAndTime + " " + "%s, %.2f, %.2f\n", actionTaken, firstAmount, secondAmount);
+            writer.printf(formattedDateAndTime + " " + "%s" + ":" + " %.2f %.2f\n", actionTaken, moneyAddedOrSubtracted, totalAvailableFunds);
             writer.close();
         }
         catch (FileNotFoundException fnf) {
