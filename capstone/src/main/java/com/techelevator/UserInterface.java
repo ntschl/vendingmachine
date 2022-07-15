@@ -94,6 +94,10 @@ public class UserInterface {
         System.out.print("How many whole dollars would you like to feed the machine? $");
         String valueMoney = userInput.nextLine();
         BigDecimal moneyDeposited = BigDecimal.valueOf(Double.parseDouble(valueMoney));
+        if (moneyDeposited.compareTo(BigDecimal.ZERO) == -1) {
+            System.out.println("Cannot accept negative value.");
+            return;
+        }
         vm.addMoney(moneyDeposited);
         vm.log.updateLog("FEED MONEY", moneyDeposited = BigDecimal.valueOf(Double.parseDouble(valueMoney)), vm.money.currentMoneyProvided);
         return;
